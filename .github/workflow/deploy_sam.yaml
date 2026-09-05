@@ -3,7 +3,7 @@ name: CI/CD - aws-serverless-scalable-api
 on:
   push:
     branches:
-      - develop
+      - main
 
 permissions:
   id-token: write
