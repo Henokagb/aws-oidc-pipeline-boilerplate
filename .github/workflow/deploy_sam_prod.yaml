@@ -5,6 +5,7 @@ on:
     branches:
       - main
 
+
 permissions:
   id-token: write
   contents: read
@@ -50,7 +51,6 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          pip install -r requirements-dev.txt
 
       - name: Run pytest
         run: pytest --maxfail=1 --disable-warnings -q
@@ -80,13 +80,12 @@ jobs:
           path: .aws-sam/build
           retention-days: 1
 
-  deploy-dev:
-    name: Deploy to Dev
+  deploy-prod:
+    name: Deploy to Prod
     runs-on: ubuntu-latest
     needs: build
-    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
     environment:
-      name: dev
+      name: prod
     steps:
       - uses: actions/checkout@v4
 
@@ -102,14 +101,14 @@ jobs:
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_DEV }}
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_PROD }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: SAM deploy (dev)
+      - name: SAM deploy (prod)
         run: |
           sam deploy \
-            --config-env dev \
-            --stack-name aws-serverless-scalable-api-dev \
+            --config-env prod \
+            --stack-name aws-serverless-scalable-api-prod \
             --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM \
             --no-confirm-changeset \
             --no-fail-on-empty-changeset \
