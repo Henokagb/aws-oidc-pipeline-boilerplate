@@ -102,7 +102,6 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_DEV }}
           aws-region: ${{ env.AWS_REGION }}
-          role-skip-session-tagging: true
 
       - name: SAM deploy (dev)
         run: |
