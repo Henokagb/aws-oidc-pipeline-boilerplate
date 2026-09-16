@@ -1,6 +1,4 @@
 import json
-import boto
-
 
 def lambda_handler(event, context):
     """AWS Lambda handler."""
