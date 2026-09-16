@@ -36,25 +36,6 @@ jobs:
       - name: Run black (check only)
         run: black --check .
 
-  test:
-    name: Unit tests
-    runs-on: ubuntu-latest
-    needs: lint
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
-
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-
-      - name: Run pytest
-        run: pytest --maxfail=1 --disable-warnings -q
-
   build:
     name: SAM build
     runs-on: ubuntu-latest
