@@ -22,7 +22,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: !Sub "api-${Environment}"
-      Handler: app.handler
+      Handler: app.lambda_handler
       CodeUri: src/
       Environment:
         Variables:
