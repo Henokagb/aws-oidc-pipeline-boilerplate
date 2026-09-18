@@ -24,7 +24,9 @@ Resources:
       FunctionName: !Sub "api-${Environment}"
       Handler: app.lambda_handler
       CodeUri: src/
-      Environment: prod
+      Environment:
+        Variables:
+          ENVIRONMENT: prod
 
 Outputs:
   TasksFunctionArn:
