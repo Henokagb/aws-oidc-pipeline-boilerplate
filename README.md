@@ -141,6 +141,7 @@ In this example, let's give the necessary permissions to deploy a stack from cli
     ]
 }
 ```
+
 ## Repeat for prod (separate role, separate account if possible)
 
 Create GithubActionsDeployRole-Prod with a trust policy scoped to the production environment (e.g. environment:production in the sub claim). Ideally, prod lives in a separate AWS account (good architecture practice: blast radius isolation); otherwise, at minimum use a different IAM role with the same permission shape but kept strictly separate from dev.
