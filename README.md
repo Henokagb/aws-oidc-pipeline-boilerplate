@@ -1,7 +1,7 @@
 
 # Deploy your serverless multi-environment infra on AWS via IaC through Github Workflow 
 
-Github Dev and Prod workflows, for deploying resources on AWS via IaC using AWS SAM (Serverlss Application Model).
+Github Dev and Prod workflows (Manual validation on prod deployment), for deploying resources on AWS via IaC using AWS SAM (Serverlss Application Model).
 
 
 
@@ -154,7 +154,12 @@ aws-actions/configure-aws-credentials attaches session tags (repo, branch, workf
 ## Worflows
 
 The workflows files in `.github/workflows` trigger a deployment in dev or prod depending the branch you push on.
+
+Dev branch
 ![diagram](./images/workflow.png)
+
+Prod branch
+![diagram](./images/prod-workflow.png)
 
 
 You can then check in cloud formation that your stack has been created/updated.
