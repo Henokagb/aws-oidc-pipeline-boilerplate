@@ -137,7 +137,25 @@ In this example, let's give the necessary permissions to deploy a stack from cli
                 "lambda:PutFunctionConcurrency"
             ],
             "Resource": "*"
-        }
+        },
+        {
+            "Sid": "IamRolesForLambda",
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateRole",
+                "iam:DeleteRole",
+                "iam:GetRole",
+                "iam:PutRolePolicy",
+                "iam:DeleteRolePolicy",
+                "iam:GetRolePolicy",
+                "iam:AttachRolePolicy",
+                "iam:DetachRolePolicy",
+                "iam:TagRole",
+                "iam:UntagRole",
+                "iam:PassRole"
+            ],
+            "Resource": "*"
+        },
     ]
 }
 ```
