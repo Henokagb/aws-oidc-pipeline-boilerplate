@@ -7,7 +7,7 @@ Parameters:
     AllowedValues:
       - dev
       - prod
-    Default: dev
+    Default: prod
 
 Globals:
   Function:
@@ -24,9 +24,6 @@ Resources:
       FunctionName: !Sub "api-${Environment}"
       Handler: app.lambda_handler
       CodeUri: src/
-      Environment:
-        Variables:
-          ENVIRONMENT: prod
 
 Outputs:
   TasksFunctionArn:
