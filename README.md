@@ -154,3 +154,5 @@ aws-actions/configure-aws-credentials attaches session tags (repo, branch, workf
 ## Worflows
 
 The workflows files in `.github/workflows` trigger a deployment in dev or prod depending the branch you push on.
+
+You can then check in cloud formation that your stack has been created/updated.
