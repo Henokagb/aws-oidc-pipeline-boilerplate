@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  Environment:
+    Type: String
+    AllowedValues:
+      - dev
+      - prod
+    Default: dev
+
+Globals:
+  Function:
+    Runtime: python3.12
+    Timeout: 10
+    MemorySize: 128
+    Architectures:
+      - x86_64
+
+Resources:
+  TasksFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub "api-${Environment}"
+      Handler: app.lambda_handler
+      CodeUri: src/
+      Environment:
+        Variables:
+          ENVIRONMENT: !Ref Environment
+
+Outputs:
+  TasksFunctionArn:
+    Description: ARN de la fonction Lambda Tasks
+    Value: !GetAtt TasksFunction.Arn
+
+  TasksFunctionName:
+    Description: Nom de la fonction Lambda Tasks
+    Value: !Ref TasksFunction
