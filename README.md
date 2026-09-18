@@ -1,22 +1,19 @@
 
-# Deploy your multi-environment infra on AWS via IaC through Github Workflow 
+# Deploy your serverless multi-environment infra on AWS via IaC through Github Workflow 
 
-Standardizing the deployment of your infra via infrastructure as code is a best pratice of cloud deployment. But When a team have to work in collaboration on the same stack, how do you prevent drifts ?
-
-By using an SCM (Source Control Manager) and automating the stack deployment in different environment via workflows.
-How does it work with Github.
+Github Dev and Prod workflows, for deploying resources on AWS via IaC using AWS SAM (Serverlss Application Model).
 
 
 
 
-## Structure
+## Overview
 
-
+![diagram](./images/overview.png)
 ## Create the GitHub OIDC provider in IAM
 
 In IAM > Identity providers > Add provider, choose OpenID Connect. Provider URL: token.actions.githubusercontent.com. Audience: sts.amazonaws.com. This is a one-time setup per AWS account (even if you later create several dev/prod roles on top of it).
 
-
+![diagram](./images/oidc.png)
 ## Write the trust policy scoped to your repo and environment
 
 The trust policy defines WHO can assume the role. 
@@ -153,3 +150,6 @@ Copy the ARN of each role (arn:aws:iam::ACCOUNT_ID:role/GithubActionsDeployRole-
 ## Don't forget sts:TagSession in the trust policy
 
 aws-actions/configure-aws-credentials attaches session tags (repo, branch, workflow) to the AssumeRoleWithWebIdentity call by default. Make sure your trust policy's Action list includes both sts:AssumeRoleWithWebIdentity and sts:TagSession, otherwise the assume-role call fails with a generic 'Not authorized' error even when everything else is correct.
+## Worflows
+
+The workflows files in `.github/workflows` trigger a deployment in dev or prod depending the branch you push on.
